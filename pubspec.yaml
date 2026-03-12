@@ -3,7 +3,7 @@ description: >
   Flutter subscriber for the zenoh counter protocol.
   Receives real-time counter values from zenoh-counter-cpp's SHM publisher.
 publish_to: 'none'
-version: 0.3.0
+version: 0.4.0
 
 environment:
   sdk: ^3.11.1
