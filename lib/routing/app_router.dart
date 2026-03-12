@@ -12,18 +12,15 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(
         path: '/connect',
-        builder: (context, state) =>
-            const ConnectionScreen(),
+        builder: (context, state) => const ConnectionScreen(),
       ),
       GoRoute(
         path: '/counter',
-        builder: (context, state) =>
-            const CounterScreen(),
+        builder: (context, state) => const CounterScreen(),
       ),
       GoRoute(
         path: '/settings',
-        builder: (context, state) =>
-            const SettingsScreen(),
+        builder: (context, state) => const SettingsScreen(),
       ),
     ],
   );
