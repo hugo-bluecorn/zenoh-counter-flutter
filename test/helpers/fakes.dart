@@ -7,8 +7,7 @@ import 'package:zenoh_counter_flutter/data/repositories/settings_repository.dart
 
 /// Fake [CounterRepository] with a controllable broadcast stream.
 class FakeCounterRepository implements CounterRepository {
-  final _controller =
-      StreamController<CounterValue>.broadcast();
+  final _controller = StreamController<CounterValue>.broadcast();
 
   bool _connected = false;
 
@@ -42,6 +41,5 @@ class FakeSettingsRepository implements SettingsRepository {
   Future<ConnectionConfig> load() async => _config;
 
   @override
-  Future<void> save(ConnectionConfig config) async =>
-      _config = config;
+  Future<void> save(ConnectionConfig config) async => _config = config;
 }

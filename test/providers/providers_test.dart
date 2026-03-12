@@ -88,7 +88,6 @@ void main() {
 
     test(
       'provider disposal triggers cleanup',
-      skip: 'Requires zenoh native libraries',
       () {
         final container = ProviderContainer();
 
