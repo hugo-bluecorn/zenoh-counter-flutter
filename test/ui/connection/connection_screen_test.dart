@@ -1,4 +1,3 @@
-// ignore: always_use_package_imports
 import 'package:flutter/material.dart' hide ConnectionState;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,35 +8,42 @@ import 'package:zenoh_counter_flutter/ui/connection/connection_viewmodel.dart';
 
 import '../../helpers/fakes.dart';
 
-/// Pumps a [ConnectionScreen] wrapped in required providers.
-///
-/// Uses [MaterialApp] for basic widget tests, or [GoRouter]
-/// when navigation verification is needed.
+GoRouter _testRouter() {
+  return GoRouter(
+    initialLocation: '/connect',
+    routes: [
+      GoRoute(
+        path: '/connect',
+        builder: (context, state) =>
+            const ConnectionScreen(),
+      ),
+      GoRoute(
+        path: '/counter',
+        builder: (context, state) => const Scaffold(
+          body: Center(child: Text('Counter Screen')),
+        ),
+      ),
+    ],
+  );
+}
+
+/// Builds a test app with [ConnectionScreen] and
+/// required provider overrides.
 Widget _buildTestApp({
   ConnectionState initialState = const ConnectionState(),
   GoRouter? router,
 }) {
-  final fakeVm = FakeConnectionViewModel(initialState);
-  final overrides = [
-    connectionViewModelProvider.overrideWith(() => fakeVm),
-    counterRepositoryProvider.overrideWith(
-      (ref) => FakeCounterRepository(),
-    ),
-  ];
-
-  if (router != null) {
-    return ProviderScope(
-      overrides: overrides,
-      child: MaterialApp.router(
-        routerConfig: router,
-      ),
-    );
-  }
-
   return ProviderScope(
-    overrides: overrides,
-    child: const MaterialApp(
-      home: ConnectionScreen(),
+    overrides: [
+      connectionViewModelProvider.overrideWith(
+        () => FakeConnectionViewModel(initialState),
+      ),
+      counterRepositoryProvider.overrideWith(
+        (ref) => FakeCounterRepository(),
+      ),
+    ],
+    child: MaterialApp.router(
+      routerConfig: router ?? _testRouter(),
     ),
   );
 }
@@ -51,15 +57,24 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(
-          find.widgetWithText(TextField, 'Connect endpoint'),
+          find.widgetWithText(
+            TextField,
+            'Connect endpoint',
+          ),
           findsOneWidget,
         );
         expect(
-          find.widgetWithText(TextField, 'Listen endpoint'),
+          find.widgetWithText(
+            TextField,
+            'Listen endpoint',
+          ),
           findsOneWidget,
         );
         expect(
-          find.widgetWithText(TextField, 'Key expression'),
+          find.widgetWithText(
+            TextField,
+            'Key expression',
+          ),
           findsOneWidget,
         );
         expect(
@@ -82,7 +97,10 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-        expect(find.text('Connection refused'), findsOneWidget);
+        expect(
+          find.text('Connection refused'),
+          findsOneWidget,
+        );
       },
     );
 
@@ -92,9 +110,11 @@ void main() {
         await tester.pumpWidget(_buildTestApp());
         await tester.pumpAndSettle();
 
-        // Enter a connect endpoint.
         await tester.enterText(
-          find.widgetWithText(TextField, 'Connect endpoint'),
+          find.widgetWithText(
+            TextField,
+            'Connect endpoint',
+          ),
           'tcp/localhost:7447',
         );
 
@@ -103,17 +123,11 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-        // The FakeConnectionViewModel delegates to the real
-        // connect(), which transitions through connecting ->
-        // connected (since FakeCounterRepository.connect
-        // succeeds). Verify the state reached connected.
-        final container = ProviderScope.containerOf(
-          tester.element(find.byType(ConnectionScreen)),
-        );
-        final state = container.read(connectionViewModelProvider);
+        // After connect succeeds, navigation to /counter
+        // occurs. Verify by finding the counter screen.
         expect(
-          state.status,
-          ConnectionStatus.connected,
+          find.text('Counter Screen'),
+          findsOneWidget,
         );
       },
     );
@@ -121,30 +135,14 @@ void main() {
     testWidgets(
       'navigates to /counter on successful connection',
       (tester) async {
-        final router = GoRouter(
-          initialLocation: '/connect',
-          routes: [
-            GoRoute(
-              path: '/connect',
-              builder: (context, state) =>
-                  const ConnectionScreen(),
-            ),
-            GoRoute(
-              path: '/counter',
-              builder: (context, state) => const Scaffold(
-                body: Center(child: Text('Counter Screen')),
-              ),
-            ),
-          ],
-        );
-
-        await tester.pumpWidget(
-          _buildTestApp(router: router),
-        );
+        await tester.pumpWidget(_buildTestApp());
         await tester.pumpAndSettle();
 
         await tester.enterText(
-          find.widgetWithText(TextField, 'Connect endpoint'),
+          find.widgetWithText(
+            TextField,
+            'Connect endpoint',
+          ),
           'tcp/localhost:7447',
         );
 
@@ -153,8 +151,10 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-        // Verify we navigated to the counter screen.
-        expect(find.text('Counter Screen'), findsOneWidget);
+        expect(
+          find.text('Counter Screen'),
+          findsOneWidget,
+        );
       },
     );
 
@@ -184,9 +184,15 @@ void main() {
         await tester.pumpAndSettle();
 
         final textField = tester.widget<TextField>(
-          find.widgetWithText(TextField, 'Key expression'),
+          find.widgetWithText(
+            TextField,
+            'Key expression',
+          ),
         );
-        expect(textField.controller?.text, 'demo/counter');
+        expect(
+          textField.controller?.text,
+          'demo/counter',
+        );
       },
     );
   });
