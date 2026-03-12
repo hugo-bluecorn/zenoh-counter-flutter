@@ -1,4 +1,23 @@
 # CHANGELOG
+## [0.6.0] - 2026-03-12
+
+### Added
+- ConnectionScreen: endpoint text fields (connect, listen,
+  key expression), connect button with disabled state during
+  connecting, error display, navigation to /counter on success
+- CounterScreen: large centered counter display, last update
+  timestamp, connection status indicator, settings icon
+  navigation, disconnect button
+- SettingsScreen: endpoint config fields populated from saved
+  config, Save and Reset to defaults buttons, loading indicator
+  and error state display
+- SettingsViewModel: AsyncNotifier loading/saving ConnectionConfig
+  via SettingsRepository, settingsViewModelProvider added to
+  providers
+- 19 new widget/unit tests (6 ConnectionScreen + 6 CounterScreen
+  + 5 SettingsScreen + 2 SettingsViewModel) using
+  ProviderScope.overrides with fakes
+
 ## [0.5.0] - 2026-03-12
 
 ### Added

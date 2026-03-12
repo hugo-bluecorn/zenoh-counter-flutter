@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zenoh_counter_flutter/data/models/connection_config.dart';
 import 'package:zenoh_counter_flutter/data/repositories/counter_repository.dart';
 import 'package:zenoh_counter_flutter/data/repositories/counter_repository_impl.dart';
 import 'package:zenoh_counter_flutter/data/repositories/settings_repository.dart';
@@ -7,6 +8,7 @@ import 'package:zenoh_counter_flutter/data/repositories/settings_repository_impl
 import 'package:zenoh_counter_flutter/data/services/zenoh_service.dart';
 import 'package:zenoh_counter_flutter/ui/connection/connection_viewmodel.dart';
 import 'package:zenoh_counter_flutter/ui/counter/counter_viewmodel.dart';
+import 'package:zenoh_counter_flutter/ui/settings/settings_viewmodel.dart';
 
 // --- Infrastructure ---
 
@@ -56,4 +58,10 @@ final connectionViewModelProvider =
 final counterViewModelProvider =
     NotifierProvider<CounterViewModel, CounterState>(
       CounterViewModel.new,
+    );
+
+/// Settings persistence ViewModel.
+final settingsViewModelProvider =
+    AsyncNotifierProvider<SettingsViewModel, ConnectionConfig>(
+      SettingsViewModel.new,
     );
