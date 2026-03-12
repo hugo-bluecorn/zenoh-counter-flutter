@@ -71,8 +71,11 @@ class FakeSettingsViewModel extends SettingsViewModel {
 
   @override
   FutureOr<ConnectionConfig> build() {
-    state = _initialState;
-    return _initialState.value ?? const ConnectionConfig();
+    return _initialState.when(
+      data: (config) => config,
+      loading: () => Completer<ConnectionConfig>().future,
+      error: (err, stack) => throw err,
+    );
   }
 
   @override
