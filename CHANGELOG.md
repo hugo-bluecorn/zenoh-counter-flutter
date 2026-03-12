@@ -1,4 +1,15 @@
 # CHANGELOG
+## [0.7.0] - 2026-03-12
+
+### Added
+- go_router navigation: three routes (/connect, /counter, /settings)
+  wired to actual screen widgets, routerProvider defined
+- MaterialApp.router integration in App widget with theme
+- dev.sh script for local Flutter development (peer mode default,
+  --router flag for Android/router mode)
+- 5 router tests (initial location, route-to-screen mapping,
+  unknown route handling)
+
 ## [0.6.0] - 2026-03-12
 
 ### Added

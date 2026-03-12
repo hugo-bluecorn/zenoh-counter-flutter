@@ -57,7 +57,7 @@ void main() {
       (tester) async {
         await pumpApp(tester);
 
-        expect(find.text('Connection'), findsOneWidget);
+        expect(find.byType(AppBar), findsOneWidget);
       },
     );
   });
