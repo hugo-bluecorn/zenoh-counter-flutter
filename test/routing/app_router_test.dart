@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart' hide ConnectionState;
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zenoh_counter_flutter/data/models/connection_config.dart';
 import 'package:zenoh_counter_flutter/providers/providers.dart';
 import 'package:zenoh_counter_flutter/routing/app_router.dart';
 import 'package:zenoh_counter_flutter/ui/connection/connection_screen.dart';
-import 'package:zenoh_counter_flutter/ui/connection/connection_viewmodel.dart';
 import 'package:zenoh_counter_flutter/ui/counter/counter_screen.dart';
 import 'package:zenoh_counter_flutter/ui/settings/settings_screen.dart';
 
@@ -19,13 +18,13 @@ Widget _buildTestApp({
   return ProviderScope(
     overrides: [
       connectionViewModelProvider.overrideWith(
-        () => FakeConnectionViewModel(),
+        FakeConnectionViewModel.new,
       ),
       counterRepositoryProvider.overrideWith(
         (ref) => FakeCounterRepository(),
       ),
       counterViewModelProvider.overrideWith(
-        () => FakeCounterViewModel(),
+        FakeCounterViewModel.new,
       ),
       settingsViewModelProvider.overrideWith(
         () => FakeSettingsViewModel(
