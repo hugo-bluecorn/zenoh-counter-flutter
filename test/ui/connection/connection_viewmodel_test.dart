@@ -1,14 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zenoh_counter_flutter/data/models/connection_config.dart';
-import 'package:zenoh_counter_flutter/data/repositories/counter_repository.dart';
 import 'package:zenoh_counter_flutter/providers/providers.dart';
 import 'package:zenoh_counter_flutter/ui/connection/connection_viewmodel.dart';
 
 import '../../helpers/fakes.dart';
 import '../../helpers/test_data.dart';
 
-/// Fake that throws on [connect] to simulate connection failure.
+/// Fake that throws on connect to simulate connection failure.
 class ThrowingFakeCounterRepository extends FakeCounterRepository {
   @override
   void connect(ConnectionConfig config) {
@@ -42,11 +41,9 @@ void main() {
     });
 
     test('connect transitions to connected on success', () {
-      final vm = container.read(
-        connectionViewModelProvider.notifier,
-      );
-
-      vm.connect(testConfig);
+      container
+          .read(connectionViewModelProvider.notifier)
+          .connect(testConfig);
 
       final state = container.read(
         connectionViewModelProvider,
@@ -64,11 +61,9 @@ void main() {
       );
       addTearDown(throwingContainer.dispose);
 
-      final vm = throwingContainer.read(
-        connectionViewModelProvider.notifier,
-      );
-
-      vm.connect(testConfig);
+      throwingContainer
+          .read(connectionViewModelProvider.notifier)
+          .connect(testConfig);
 
       final state = throwingContainer.read(
         connectionViewModelProvider,
@@ -78,12 +73,10 @@ void main() {
     });
 
     test('disconnect resets to disconnected state', () {
-      final vm = container.read(
-        connectionViewModelProvider.notifier,
-      );
-
-      vm.connect(testConfig);
-      vm.disconnect();
+      container
+          .read(connectionViewModelProvider.notifier)
+        ..connect(testConfig)
+        ..disconnect();
 
       final state = container.read(
         connectionViewModelProvider,
@@ -101,11 +94,9 @@ void main() {
           (prev, next) => states.add(next.status),
         );
 
-        final vm = container.read(
-          connectionViewModelProvider.notifier,
-        );
-
-        vm.connect(testConfig);
+        container
+            .read(connectionViewModelProvider.notifier)
+            .connect(testConfig);
 
         expect(states, contains(ConnectionStatus.connecting));
       },

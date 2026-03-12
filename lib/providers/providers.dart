@@ -5,6 +5,7 @@ import 'package:zenoh_counter_flutter/data/repositories/counter_repository_impl.
 import 'package:zenoh_counter_flutter/data/repositories/settings_repository.dart';
 import 'package:zenoh_counter_flutter/data/repositories/settings_repository_impl.dart';
 import 'package:zenoh_counter_flutter/data/services/zenoh_service.dart';
+import 'package:zenoh_counter_flutter/ui/connection/connection_viewmodel.dart';
 
 // --- Infrastructure ---
 
@@ -40,4 +41,12 @@ final counterRepositoryProvider = Provider<CounterRepository>(
     ref.onDispose(repo.dispose);
     return repo;
   },
+);
+
+// --- ViewModels ---
+
+/// Connection lifecycle ViewModel.
+final connectionViewModelProvider = NotifierProvider<
+    ConnectionViewModel, ConnectionState>(
+  ConnectionViewModel.new,
 );
