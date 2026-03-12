@@ -16,12 +16,9 @@ class SettingsRepositoryImpl implements SettingsRepository {
   @override
   Future<ConnectionConfig> load() async {
     return ConnectionConfig(
-      connectEndpoint:
-          _prefs.getString(_connectKey) ?? '',
-      listenEndpoint:
-          _prefs.getString(_listenKey) ?? '',
-      keyExpr:
-          _prefs.getString(_keyExprKey) ?? 'demo/counter',
+      connectEndpoint: _prefs.getString(_connectKey) ?? '',
+      listenEndpoint: _prefs.getString(_listenKey) ?? '',
+      keyExpr: _prefs.getString(_keyExprKey) ?? 'demo/counter',
     );
   }
 

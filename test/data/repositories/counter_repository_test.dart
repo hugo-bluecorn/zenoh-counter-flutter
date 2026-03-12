@@ -54,8 +54,7 @@ void main() {
             const Duration(seconds: 1),
           );
 
-          final byteData = ByteData(8)
-            ..setInt64(0, 42, Endian.little);
+          final byteData = ByteData(8)..setInt64(0, 42, Endian.little);
           final payload = byteData.buffer.asUint8List();
           final zbytes = ZBytes.fromUint8List(
             Uint8List.fromList(payload),
@@ -65,8 +64,9 @@ void main() {
             zbytes,
           );
 
-          final result = await repo.counterStream.first
-              .timeout(const Duration(seconds: 5));
+          final result = await repo.counterStream.first.timeout(
+            const Duration(seconds: 5),
+          );
 
           expect(result.value, equals(42));
           expect(
@@ -120,10 +120,8 @@ void main() {
           );
 
           // Send wrong-size payload (4 bytes).
-          final wrongData = ByteData(4)
-            ..setInt32(0, 1, Endian.little);
-          final wrongPayload =
-              wrongData.buffer.asUint8List();
+          final wrongData = ByteData(4)..setInt32(0, 1, Endian.little);
+          final wrongPayload = wrongData.buffer.asUint8List();
           pubSession.putBytes(
             'test/counter_repo_size',
             ZBytes.fromUint8List(
@@ -137,10 +135,8 @@ void main() {
           );
 
           // Send valid 8-byte payload.
-          final validData = ByteData(8)
-            ..setInt64(0, 99, Endian.little);
-          final validPayload =
-              validData.buffer.asUint8List();
+          final validData = ByteData(8)..setInt64(0, 99, Endian.little);
+          final validPayload = validData.buffer.asUint8List();
           pubSession.putBytes(
             'test/counter_repo_size',
             ZBytes.fromUint8List(
@@ -148,8 +144,9 @@ void main() {
             ),
           );
 
-          final result = await repo.counterStream.first
-              .timeout(const Duration(seconds: 5));
+          final result = await repo.counterStream.first.timeout(
+            const Duration(seconds: 5),
+          );
 
           expect(result.value, equals(99));
 

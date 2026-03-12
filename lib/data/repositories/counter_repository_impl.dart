@@ -39,17 +39,16 @@ class CounterRepositoryImpl implements CounterRepository {
       listenEndpoints: listenList,
     );
 
-    _subscription =
-        _zenohService.subscribe(config.keyExpr).listen(
-      _onData,
-    );
+    _subscription = _zenohService
+        .subscribe(config.keyExpr)
+        .listen(
+          _onData,
+        );
   }
 
   void _onData(Uint8List bytes) {
     if (bytes.length != 8) return;
-    final value = bytes.buffer
-        .asByteData()
-        .getInt64(0, Endian.little);
+    final value = bytes.buffer.asByteData().getInt64(0, Endian.little);
     _controller.add(
       CounterValue(
         value: value,
