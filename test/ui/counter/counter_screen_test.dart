@@ -16,17 +16,17 @@ GoRouter _testRouter() {
     routes: [
       GoRoute(
         path: '/counter',
-        builder: (_, __) => const CounterScreen(),
+        builder: (_, _) => const CounterScreen(),
       ),
       GoRoute(
         path: '/connect',
-        builder: (_, __) => const Scaffold(
+        builder: (_, _) => const Scaffold(
           body: Center(child: Text('connect-page')),
         ),
       ),
       GoRoute(
         path: '/settings',
-        builder: (_, __) => const Scaffold(
+        builder: (_, _) => const Scaffold(
           body: Center(child: Text('settings-page')),
         ),
       ),
@@ -171,9 +171,8 @@ void main() {
             counterState: const CounterState(
               isSubscribed: true,
             ),
-            connectionState: const ConnectionState(
-              status: ConnectionStatus.connected,
-            ),
+            // Default connectionState already has connected
+            // status, so no override needed here.
           ),
         );
         await tester.pumpAndSettle();
