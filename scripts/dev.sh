@@ -26,12 +26,12 @@ case "${1:-}" in
     ROUTER_PID=$!
     sleep 1
     echo "Starting C++ counter publisher (client mode)..."
-    "${ZENOH_COUNTER_CPP}/build/counter_pub" \
+    "${ZENOH_COUNTER_CPP}/build/app/counter_pub" \
       -e tcp/localhost:7447
     ;;
   *)
     echo "Starting C++ counter publisher (peer mode)..."
-    "${ZENOH_COUNTER_CPP}/build/counter_pub" \
+    "${ZENOH_COUNTER_CPP}/build/app/counter_pub" \
       -l tcp/0.0.0.0:7447
     ;;
 esac
