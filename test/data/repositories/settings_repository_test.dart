@@ -28,7 +28,7 @@ void main() {
     test(
       'save persists config and load retrieves it',
       () async {
-        final config = ConnectionConfig(
+        const config = ConnectionConfig(
           connectEndpoint: 'tcp/host:7447',
           keyExpr: 'test/key',
         );
