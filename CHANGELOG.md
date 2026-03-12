@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## [0.3.0] - 2026-03-12
+
+### Added
+- SettingsRepository: persists ConnectionConfig via
+  SharedPreferences (load/save with defaults)
+- CounterRepository: decodes Stream<Uint8List> into
+  Stream<CounterValue> via broadcast StreamController
+- Abstract interfaces for both repositories (separated
+  from implementations)
+- 8 new tests (4 SettingsRepository unit + 4
+  CounterRepository integration with two-session TCP)
+
 ## [0.2.0] - 2026-03-12
 
 ### Added
