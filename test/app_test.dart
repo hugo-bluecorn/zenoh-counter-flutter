@@ -4,8 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zenoh_counter_flutter/app.dart';
 import 'package:zenoh_counter_flutter/providers/providers.dart';
-import 'package:zenoh_counter_flutter/routing/app_router.dart';
-
 import 'helpers/fakes.dart';
 
 void main() {
