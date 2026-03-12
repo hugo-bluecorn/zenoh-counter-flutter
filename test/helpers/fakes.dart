@@ -4,6 +4,7 @@ import 'package:zenoh_counter_flutter/data/models/connection_config.dart';
 import 'package:zenoh_counter_flutter/data/models/counter_value.dart';
 import 'package:zenoh_counter_flutter/data/repositories/counter_repository.dart';
 import 'package:zenoh_counter_flutter/data/repositories/settings_repository.dart';
+import 'package:zenoh_counter_flutter/ui/connection/connection_viewmodel.dart';
 
 /// Fake [CounterRepository] with a controllable broadcast stream.
 class FakeCounterRepository implements CounterRepository {
@@ -42,4 +43,14 @@ class FakeSettingsRepository implements SettingsRepository {
 
   @override
   Future<void> save(ConnectionConfig config) async => _config = config;
+}
+
+/// Fake [ConnectionViewModel] with controllable initial state.
+class FakeConnectionViewModel extends ConnectionViewModel {
+  FakeConnectionViewModel([this._initialState = const ConnectionState()]);
+
+  final ConnectionState _initialState;
+
+  @override
+  ConnectionState build() => _initialState;
 }
