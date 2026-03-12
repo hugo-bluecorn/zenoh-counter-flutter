@@ -41,9 +41,7 @@ void main() {
     });
 
     test('connect transitions to connected on success', () {
-      container
-          .read(connectionViewModelProvider.notifier)
-          .connect(testConfig);
+      container.read(connectionViewModelProvider.notifier).connect(testConfig);
 
       final state = container.read(
         connectionViewModelProvider,
@@ -73,8 +71,7 @@ void main() {
     });
 
     test('disconnect resets to disconnected state', () {
-      container
-          .read(connectionViewModelProvider.notifier)
+      container.read(connectionViewModelProvider.notifier)
         ..connect(testConfig)
         ..disconnect();
 

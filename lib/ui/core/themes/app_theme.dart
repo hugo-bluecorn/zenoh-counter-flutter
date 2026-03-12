@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   /// Light theme using Material 3 with a blue color scheme.
   static ThemeData get light => ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.blue,
-      );
+    useMaterial3: true,
+    colorSchemeSeed: Colors.blue,
+  );
 }

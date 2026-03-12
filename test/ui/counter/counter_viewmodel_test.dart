@@ -1,8 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zenoh_counter_flutter/data/models/counter_value.dart';
 import 'package:zenoh_counter_flutter/providers/providers.dart';
-import 'package:zenoh_counter_flutter/ui/counter/counter_viewmodel.dart';
 
 import '../../helpers/fakes.dart';
 import '../../helpers/test_data.dart';
@@ -31,9 +29,7 @@ void main() {
     });
 
     test('startListening sets isSubscribed to true', () {
-      container
-          .read(counterViewModelProvider.notifier)
-          .startListening();
+      container.read(counterViewModelProvider.notifier).startListening();
       expect(
         container.read(counterViewModelProvider).isSubscribed,
         isTrue,
@@ -43,27 +39,22 @@ void main() {
     test(
       'startListening updates state on stream emit',
       () async {
-        container
-            .read(counterViewModelProvider.notifier)
-            .startListening();
+        container.read(counterViewModelProvider.notifier).startListening();
         fakeRepo.emit(testCounterValue);
         await Future<void>.delayed(Duration.zero);
-        final state =
-            container.read(counterViewModelProvider);
+        final state = container.read(counterViewModelProvider);
         expect(state.value, 42);
         expect(state.lastUpdate, testTimestamp);
       },
     );
 
     test('stopListening resets state', () async {
-      final vm = container
-          .read(counterViewModelProvider.notifier);
-      vm.startListening();
+      final vm = container.read(counterViewModelProvider.notifier)
+        ..startListening();
       fakeRepo.emit(testCounterValue);
       await Future<void>.delayed(Duration.zero);
       vm.stopListening();
-      final state =
-          container.read(counterViewModelProvider);
+      final state = container.read(counterViewModelProvider);
       expect(state.value, isNull);
       expect(state.isSubscribed, isFalse);
     });
@@ -71,10 +62,9 @@ void main() {
     test(
       'startListening cancels previous subscription',
       () async {
-        final vm = container
-            .read(counterViewModelProvider.notifier);
-        vm.startListening();
-        vm.startListening();
+        container.read(counterViewModelProvider.notifier)
+          ..startListening()
+          ..startListening();
         fakeRepo.emit(testCounterValue);
         await Future<void>.delayed(Duration.zero);
         expect(
