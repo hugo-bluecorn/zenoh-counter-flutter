@@ -74,8 +74,7 @@ class FakeSettingsViewModel extends SettingsViewModel {
     return _initialState.when(
       data: (config) => config,
       loading: () => Completer<ConnectionConfig>().future,
-      error: (err, stack) =>
-          throw err is Exception ? err : Exception('$err'),
+      error: (err, stack) => throw err is Exception ? err : Exception('$err'),
     );
   }
 

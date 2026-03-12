@@ -14,8 +14,7 @@ GoRouter _testRouter() {
     routes: [
       GoRoute(
         path: '/connect',
-        builder: (context, state) =>
-            const ConnectionScreen(),
+        builder: (context, state) => const ConnectionScreen(),
       ),
       GoRoute(
         path: '/counter',

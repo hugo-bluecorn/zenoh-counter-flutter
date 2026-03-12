@@ -52,9 +52,7 @@ void main() {
         listenEndpoint: 'tcp/0.0.0.0:7448',
         keyExpr: 'test/key',
       );
-      await container
-          .read(settingsViewModelProvider.notifier)
-          .save(newConfig);
+      await container.read(settingsViewModelProvider.notifier).save(newConfig);
 
       // Assert: state is updated.
       final state = container.read(settingsViewModelProvider);

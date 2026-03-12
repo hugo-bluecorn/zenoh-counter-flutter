@@ -12,34 +12,27 @@ class CounterScreen extends ConsumerStatefulWidget {
   const CounterScreen({super.key});
 
   @override
-  ConsumerState<CounterScreen> createState() =>
-      _CounterScreenState();
+  ConsumerState<CounterScreen> createState() => _CounterScreenState();
 }
 
-class _CounterScreenState
-    extends ConsumerState<CounterScreen> {
+class _CounterScreenState extends ConsumerState<CounterScreen> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(counterViewModelProvider.notifier)
-          .startListening();
+      ref.read(counterViewModelProvider.notifier).startListening();
     });
   }
 
   void _onDisconnect() {
-    ref
-        .read(connectionViewModelProvider.notifier)
-        .disconnect();
+    ref.read(connectionViewModelProvider.notifier).disconnect();
     context.go('/connect');
   }
 
   @override
   Widget build(BuildContext context) {
     final counterState = ref.watch(counterViewModelProvider);
-    final connState =
-        ref.watch(connectionViewModelProvider);
+    final connState = ref.watch(connectionViewModelProvider);
 
     return Scaffold(
       appBar: _CounterAppBar(
@@ -54,8 +47,7 @@ class _CounterScreenState
   }
 }
 
-class _CounterAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class _CounterAppBar extends StatelessWidget implements PreferredSizeWidget {
   const _CounterAppBar({
     required this.connStatus,
     required this.onSettings,
@@ -66,8 +58,8 @@ class _CounterAppBar extends StatelessWidget
 
   @override
   Size get preferredSize => const Size.fromHeight(
-        kToolbarHeight,
-      );
+    kToolbarHeight,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -91,10 +83,9 @@ class _ConnectionIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color =
-        status == ConnectionStatus.connected
-            ? Colors.green
-            : Colors.grey;
+    final color = status == ConnectionStatus.connected
+        ? Colors.green
+        : Colors.grey;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Icon(
@@ -147,9 +138,7 @@ class _CounterDisplay extends StatelessWidget {
       children: [
         Text(
           '${state.value}',
-          style: Theme.of(context)
-              .textTheme
-              .displayLarge,
+          style: Theme.of(context).textTheme.displayLarge,
         ),
         if (state.lastUpdate != null)
           _TimestampLabel(

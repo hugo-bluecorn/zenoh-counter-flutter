@@ -11,12 +11,10 @@ class ConnectionScreen extends ConsumerStatefulWidget {
   const ConnectionScreen({super.key});
 
   @override
-  ConsumerState<ConnectionScreen> createState() =>
-      _ConnectionScreenState();
+  ConsumerState<ConnectionScreen> createState() => _ConnectionScreenState();
 }
 
-class _ConnectionScreenState
-    extends ConsumerState<ConnectionScreen> {
+class _ConnectionScreenState extends ConsumerState<ConnectionScreen> {
   late final TextEditingController _connectCtrl;
   late final TextEditingController _listenCtrl;
   late final TextEditingController _keyExprCtrl;
@@ -45,9 +43,7 @@ class _ConnectionScreenState
       listenEndpoint: _listenCtrl.text,
       keyExpr: _keyExprCtrl.text,
     );
-    ref
-        .read(connectionViewModelProvider.notifier)
-        .connect(config);
+    ref.read(connectionViewModelProvider.notifier).connect(config);
   }
 
   @override
@@ -135,8 +131,7 @@ class _ConnectButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDisabled =
-        status == ConnectionStatus.connecting;
+    final isDisabled = status == ConnectionStatus.connecting;
     return ElevatedButton(
       onPressed: isDisabled ? null : onPressed,
       child: const Text('Connect'),

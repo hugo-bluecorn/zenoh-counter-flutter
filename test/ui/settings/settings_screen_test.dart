@@ -121,8 +121,7 @@ void main() {
       (tester) async {
         await tester.pumpWidget(
           _buildTestApp(
-            initialState:
-                const AsyncLoading<ConnectionConfig>(),
+            initialState: const AsyncLoading<ConnectionConfig>(),
           ),
         );
         await tester.pump();
