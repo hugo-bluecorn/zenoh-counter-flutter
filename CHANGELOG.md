@@ -1,4 +1,20 @@
 # CHANGELOG
+## [0.5.0] - 2026-03-12
+
+### Added
+- App shell: ProviderScope + MaterialApp.router with
+  Material 3 theme, go_router with placeholder routes
+- ConnectionViewModel: connect/disconnect lifecycle
+  with status enum (disconnected, connecting, connected,
+  error) via NotifierProvider
+- CounterViewModel: stream subscription management
+  with startListening/stopListening, state updates
+  from CounterRepository, StreamSubscription disposal
+  via ref.onDispose
+- 13 new tests (3 app shell + 5 ConnectionViewModel
+  + 5 CounterViewModel) using ProviderContainer
+  with fake repositories
+
 ## [0.4.0] - 2026-03-12
 
 ### Added
