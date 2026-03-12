@@ -91,9 +91,11 @@ package:zenoh (external dependency)
   Session, Subscriber, Sample, Config, etc.
 ```
 
-**Key rule:** Only `ZenohService` imports `package:zenoh`. ViewModels never
-touch FFI types. The UI receives plain Dart types (`int`, `String`, `DateTime`,
-enums).
+**Key rule:** Only `ZenohService` imports `package:zenoh` (in `lib/`).
+`ZenohService.subscribe()` returns `Stream<Uint8List>` -- no zenoh types leak.
+ViewModels never touch FFI types. The UI receives plain Dart types (`int`,
+`String`, `DateTime`, enums). Test files MAY import `package:zenoh` directly
+for two-session integration tests.
 
 ### Counter Protocol (defined by zenoh-counter-cpp)
 
@@ -106,7 +108,8 @@ enums).
 
 **Decoding in Dart:**
 ```dart
-final bytes = sample.payloadBytes; // Uint8List, 8 bytes
+// ZenohService.subscribe() returns Stream<Uint8List> (payloadBytes extracted)
+// CounterRepositoryImpl decodes the raw bytes:
 final value = bytes.buffer.asByteData().getInt64(0, Endian.little);
 ```
 

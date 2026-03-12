@@ -221,14 +221,15 @@ class ZenohService {
   }
 
   /// Subscribe to a key expression.
-  /// Returns a Stream<Sample> — caller decodes payload.
-  Stream<Sample> subscribe(String keyExpr) {
+  /// Returns a Stream<Uint8List> — raw payload bytes per sample.
+  /// Extracts payloadBytes internally so no zenoh types leak.
+  Stream<Uint8List> subscribe(String keyExpr) {
     final session = _session;
     if (session == null) throw StateError('Not connected');
 
     _subscriber?.close();
     _subscriber = session.declareSubscriber(keyExpr);
-    return _subscriber!.stream;
+    return _subscriber!.stream.map((sample) => sample.payloadBytes);
   }
 
   /// Disconnect and release all resources.
@@ -295,7 +296,7 @@ class CounterRepositoryImpl implements CounterRepository {
 
   final ZenohService _zenohService;
   final _controller = StreamController<CounterValue>.broadcast();
-  StreamSubscription<Sample>? _subscription;
+  StreamSubscription<Uint8List>? _subscription;
 
   @override
   bool get isConnected => _zenohService.isConnected;
@@ -315,8 +316,7 @@ class CounterRepositoryImpl implements CounterRepository {
     );
 
     _subscription = _zenohService.subscribe(config.keyExpr).listen(
-      (sample) {
-        final bytes = sample.payloadBytes;
+      (bytes) {
         if (bytes.length == 8) {
           final value = bytes.buffer.asByteData().getInt64(0, Endian.little);
           _controller.add(CounterValue(
