@@ -1,5 +1,7 @@
 name: zenoh_counter_flutter
-description: "A new Flutter project."
+description: >
+  Flutter subscriber for the zenoh counter protocol.
+  Receives real-time counter values from zenoh-counter-cpp's SHM publisher.
 publish_to: 'none'
 version: 0.1.0+1
 
@@ -9,11 +11,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_riverpod: ^3.3.1
+  go_router: ^17.1.0
+  shared_preferences: ^2.5.4
+  zenoh:
+    path: ../zenoh_dart/packages/zenoh
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^6.0.0
+  integration_test:
+    sdk: flutter
+  very_good_analysis: ^10.2.0
 
 flutter:
   uses-material-design: true
