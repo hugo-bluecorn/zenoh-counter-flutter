@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zenoh/zenoh.dart';
 import 'package:zenoh_counter_flutter/data/models/connection_config.dart';
-import 'package:zenoh_counter_flutter/data/repositories/counter_repository.dart';
 import 'package:zenoh_counter_flutter/data/repositories/counter_repository_impl.dart';
 import 'package:zenoh_counter_flutter/data/services/zenoh_service.dart';
 

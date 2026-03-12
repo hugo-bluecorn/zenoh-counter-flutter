@@ -60,7 +60,7 @@ class CounterRepositoryImpl implements CounterRepository {
 
   @override
   void disconnect() {
-    _subscription?.cancel();
+    unawaited(_subscription?.cancel());
     _subscription = null;
     _zenohService.dispose();
   }
@@ -68,6 +68,6 @@ class CounterRepositoryImpl implements CounterRepository {
   @override
   void dispose() {
     disconnect();
-    _controller.close();
+    unawaited(_controller.close());
   }
 }
