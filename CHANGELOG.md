@@ -1,4 +1,16 @@
 # CHANGELOG
+## [0.4.0] - 2026-03-12
+
+### Added
+- Riverpod provider definitions: sharedPreferencesProvider,
+  zenohServiceProvider, settingsRepositoryProvider,
+  counterRepositoryProvider (with onDispose cleanup)
+- Test fakes: FakeCounterRepository (broadcast stream
+  with emit helper), FakeSettingsRepository (in-memory)
+- Test fixtures: testTimestamp, testCounterValue, testConfig
+- 5 provider tests (resolution, disposal, error on
+  missing override)
+
 
 ## [0.3.0] - 2026-03-12
 
