@@ -40,11 +40,11 @@ void main() {
             'test/zenoh_service',
           );
 
-          final pubConfig = Config();
-          pubConfig.insertJson5(
-            'connect/endpoints',
-            '["tcp/127.0.0.1:19447"]',
-          );
+          final pubConfig = Config()
+            ..insertJson5(
+              'connect/endpoints',
+              '["tcp/127.0.0.1:19447"]',
+            );
           final pubSession = Session.open(
             config: pubConfig,
           );
@@ -54,8 +54,8 @@ void main() {
             const Duration(seconds: 1),
           );
 
-          final byteData = ByteData(8);
-          byteData.setInt64(0, 42, Endian.little);
+          final byteData = ByteData(8)
+            ..setInt64(0, 42, Endian.little);
           final payload = byteData.buffer.asUint8List();
 
           final zbytes = ZBytes.fromUint8List(
