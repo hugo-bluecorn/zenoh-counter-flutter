@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -39,7 +41,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       listenEndpoint: _listenCtrl.text,
       keyExpr: _keyExprCtrl.text,
     );
-    ref.read(settingsViewModelProvider.notifier).save(config);
+    unawaited(
+      ref.read(settingsViewModelProvider.notifier).save(config),
+    );
   }
 
   void _onReset() {
