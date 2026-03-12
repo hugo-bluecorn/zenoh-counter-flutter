@@ -24,10 +24,8 @@ class ConnectionConfig {
     String? keyExpr,
   }) {
     return ConnectionConfig(
-      connectEndpoint:
-          connectEndpoint ?? this.connectEndpoint,
-      listenEndpoint:
-          listenEndpoint ?? this.listenEndpoint,
+      connectEndpoint: connectEndpoint ?? this.connectEndpoint,
+      listenEndpoint: listenEndpoint ?? this.listenEndpoint,
       keyExpr: keyExpr ?? this.keyExpr,
     );
   }

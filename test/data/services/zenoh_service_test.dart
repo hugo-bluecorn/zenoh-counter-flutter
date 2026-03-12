@@ -54,8 +54,7 @@ void main() {
             const Duration(seconds: 1),
           );
 
-          final byteData = ByteData(8)
-            ..setInt64(0, 42, Endian.little);
+          final byteData = ByteData(8)..setInt64(0, 42, Endian.little);
           final payload = byteData.buffer.asUint8List();
 
           final zbytes = ZBytes.fromUint8List(

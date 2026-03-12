@@ -26,16 +26,14 @@ class ZenohService {
 
     if (connectEndpoints.isNotEmpty) {
       config.insertJson5('mode', '"client"');
-      final json =
-          connectEndpoints.map((e) => '"$e"').join(', ');
+      final json = connectEndpoints.map((e) => '"$e"').join(', ');
       config.insertJson5(
         'connect/endpoints',
         '[$json]',
       );
     }
     if (listenEndpoints.isNotEmpty) {
-      final json =
-          listenEndpoints.map((e) => '"$e"').join(', ');
+      final json = listenEndpoints.map((e) => '"$e"').join(', ');
       config.insertJson5(
         'listen/endpoints',
         '[$json]',
@@ -58,8 +56,7 @@ class ZenohService {
     }
     _subscriber?.close();
     _subscriber = session.declareSubscriber(keyExpr);
-    return _subscriber!.stream
-        .map((sample) => sample.payloadBytes);
+    return _subscriber!.stream.map((sample) => sample.payloadBytes);
   }
 
   /// Closes the subscriber and session, releasing all
