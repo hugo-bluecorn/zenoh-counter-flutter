@@ -9,7 +9,7 @@
 set -euo pipefail
 
 ZENOH_COUNTER_CPP="${ZENOH_COUNTER_CPP:-../zenoh-counter-cpp}"
-ZENOH_DART="${ZENOH_DART:-../zenoh_dart}"
+ZENOH_DART="${ZENOH_DART:-../zenoh_dart_dev}"
 
 cleanup() {
   if [[ -n "${ROUTER_PID:-}" ]]; then
