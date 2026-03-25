@@ -9,7 +9,7 @@
 set -euo pipefail
 
 ZENOH_COUNTER_CPP="${ZENOH_COUNTER_CPP:-../zenoh-counter-cpp}"
-ZENOH_DART="${ZENOH_DART:-../zenoh_dart_dev}"
+ZENOH_DART_DEV="${ZENOH_DART_DEV:-../zenoh_dart_dev}"
 
 cleanup() {
   if [[ -n "${ROUTER_PID:-}" ]]; then
@@ -21,7 +21,7 @@ case "${1:-}" in
   --router)
     trap cleanup EXIT
     echo "Starting zenohd router..."
-    ZENOHD="${ZENOH_DART}/extern/zenoh/target/release/zenohd"
+    ZENOHD="${ZENOH_DART_DEV}/extern/zenoh/target/release/zenohd"
     "${ZENOHD}" &
     ROUTER_PID=$!
     sleep 1
